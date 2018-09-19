@@ -2,25 +2,30 @@
 # Trey Hall
 # 9/17/18
 
-consonants = [ 'B', 'C', 'D',  'F', 'G', 'H',  'J', 'K', 'L', 'M', 'N',  'P', 'Q', 'R', 'S', 'T',  'V', 'W', 'X', 'Y', 'Z']
+consonants = [ 'B', 'C', 'D', 'F', 'G', 'H',  'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z']
 vowels = ['A','E','I','O','U',]
 
+ret = main()
+
 def main ():
-	str = input("Enter a word to encrypt")
-	enc_str = ""
+    str = input("Enter a word to encrypt")
+    enc_str = ""
 
-	if str != "":
+    while str != "":
 		# begin encryption
-		for letter in range(len(str)):
-			if letterletter_is_consonant(letter) : 
-				# do consonant things
-			elif letter_is_vowel(letter) :
-				# do vowel things
-			else :
-				# is this the last letter in the string?
-				# if it is a consonant add '-ay'
+        for i in range(len(str)):
+            if letter_is_consonant(str[i]) : enc_str = new_consonant(enc_str, i)
+            elif letter_is_vowel(str[i]) : enc_str = new_vowel(enc_str, i)
+            
+            # is this the last letter in the string? if it is a consonant add '-ay'
+            if letter == str[len(str)-1] :
+                if letter_is_consonant(letter) :
+                    enc_str = add_ay(enc_str + letter)
+                    str = ""
+    pass
 
-	return 0
+    print("The new string is: ", enc_str)
+    return 0
 	
 def letter_is_vowel (letter):
 	is_vowel = false
@@ -41,5 +46,15 @@ def letter_is_consonant (letter):
 		if letter == current_letter : is_consonant = true
 
 	return is_vowel
+
+def new_consonant (_str, i) : 
+    new_str = _str + consonants[i+1]
+    return new_str
+
+def new_vowel (_str, i) : 
+    new_str = _str + vowels[i+1]
+    return new_str
+
+def add_ay (word) : return word + "ay"
 
 
