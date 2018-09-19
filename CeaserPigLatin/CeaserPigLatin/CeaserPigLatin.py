@@ -60,20 +60,25 @@ def encrypt_one_word (word) :
             
                 # is this the last letter in the string? if it is a consonant add '-ay'
                 if word[i] == word[len(word)-1] :
-                    if letter_is_consonant(word[i]) :
+                    if letter_is_consonant(word[i]) != -1 :
                         enc_str = add_ay(enc_str)
-                        word = ""
+                    word = ""
     pass
     return enc_str
 
 def Main () :
     again = "y"
 
-    while again == "y" :
-        str = input("Enter a word to encrypt: ")
+    while again != "n" :
+        if again != "y" :
+            str = again
+        else :
+            str = input("Enter a word to encrypt: ")
+
         enc_str = ""
 
         words = str.split(" ")
+        if len(words) == 0 : words = [str]
 
         while str != "":
 	        # begin encryption
@@ -86,7 +91,7 @@ def Main () :
         pass
 
         print("The new string is: ", enc_str)
-        again == input("Again? [y/n]: ")
+        again = input("Again? [y/n]: ")
     pass
     print ("Goodbye")
     return 0
